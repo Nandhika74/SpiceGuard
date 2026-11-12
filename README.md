@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌿 SpiceGuard Hub — Plant Lipids 6-Month PoC Tracker
 
 Real-time, mobile-first team project tracker built for the 4-person SpiceGuard startup team running a 6-month Proof of Concept with **Plant Lipids**.
@@ -82,3 +83,7 @@ VITE_SUPABASE_ANON_KEY="your-anon-key"
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
 - Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` as environment variables in the project settings.
+=======
+# SpiceGuard
+A personalized productivity and milestone tracking app with task management, progress tracking, profile customization, and activity monitoring.
+>>>>>>> 9258a888c8c066f4dfd99ef27c4852ac7f3e6956
