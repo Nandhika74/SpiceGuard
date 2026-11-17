@@ -1,89 +1,111 @@
-<<<<<<< HEAD
-# 🌿 SpiceGuard Hub — Plant Lipids 6-Month PoC Tracker
+# 🌿 SpiceGuard Hub
 
-Real-time, mobile-first team project tracker built for the 4-person SpiceGuard startup team running a 6-month Proof of Concept with **Plant Lipids**.
+Real-time, mobile-first project tracker for the four-person SpiceGuard team running a six-month Proof of Concept with **Plant Lipids**.
 
 ## ✨ Features
-- **Real-Time Synchronisation**: Every task, milestone, meeting, comment, and document syncs live across phones and laptops without refreshing.
-- **Invite-Only Security**: Strict allowlist enforced at the database level (`allowed_emails` table). Only authorized team members can sign up or log in.
-- **Role-Based Permissions**:
-  - All 4 members can add/edit milestones, tasks, meetings, and documents.
-  - Only the **Team Lead** (`Nithyasree M`) can delete milestones.
-  - Task deletion is restricted to the creator or Team Lead, protected with a 10-second "Undo" toast.
-  - Meetings and documents can only be deleted/edited by their creator or Team Lead.
-- **Milestone Management & Date Tracking**:
-  - Live progress % auto-calculated from completed tasks.
-  - Reordering (drag-and-drop / touch handles).
-  - Date changes prompt for a reason, preserve the original planned date, show a "Rescheduled" badge, and record entries in `milestone_date_history`.
-  - Archive/restore capability.
-  - Duplicate milestone with its tasks.
-- **Tasks & Kanban / Timeline**:
-  - List view, Kanban board with drag-and-drop status columns, and interactive Timeline/Gantt view.
-  - Inline editing, task reassignment, milestone transfers, priority badges, and overdue warnings (due within 3 days = amber, overdue = red).
-  - Rich task comments with timestamp and author role badge.
-  - Deadline validation warning if task deadline exceeds milestone planned date.
-- **Meetings & Inference Recorder**:
-  - Record agendas, rich text notes, key decisions, and critical inferences/learnings.
-  - Action items with one-click conversion to tasks inside any milestone.
-  - File attachments and guest attendees.
-- **Research & Documents Hub**:
-  - File uploads (PDF, DOCX, XLSX, CSV, PPTX, images, .ipynb up to 25 MB) to Supabase Storage.
-  - External links, categories, tags, and built-in preview modal.
-- **Team Dashboard & Activity Log**:
-  - PoC completion %, countdown to final milestone, upcoming 14-day deadlines, overdue alerts, and live activity feed.
-- **PWA Ready**: Installable on iOS/Android home screens and desktops with offline status indicator.
 
----
+- **Real-time collaboration**: Tasks, milestones, meetings, comments, documents, notifications, and activity updates sync across devices.
+- **Invite-only access**: Supabase authentication is restricted to the `allowed_emails` table.
+- **Role-based permissions**:
+  - All team members can create and edit milestones, tasks, meetings, and documents.
+  - Only the Team Lead can delete milestones.
+  - Tasks can be deleted by their creator or the Team Lead, with a 10-second undo option.
+  - Meetings and documents can be edited or deleted by their creator/uploader or the Team Lead.
+- **Milestones**:
+  - Progress is calculated automatically from completed tasks.
+  - Drag-and-drop reordering, archiving/restoring, and duplication with tasks.
+  - Rescheduling records the reason and original date, displays a badge, and writes to `milestone_date_history`.
+- **Task workspace**:
+  - List, Kanban, and Timeline/Gantt views.
+  - Inline editing, reassignment, milestone transfers, priorities, deadlines, overdue warnings, and rich comments.
+  - Validation warns when a task deadline exceeds its milestone date.
+- **Meetings and inference recorder**:
+  - Agendas, rich notes, decisions, critical inferences, guest attendees, and attachments.
+  - Convert action items into tasks in any milestone.
+- **Research and documents hub**:
+  - Upload PDF, DOCX, XLSX, CSV, PPTX, images, and `.ipynb` files up to 25 MB.
+  - External links, categories, tags, and document previews.
+- **Dashboard and activity log**:
+  - PoC completion, final-milestone countdown, upcoming deadlines, overdue alerts, and live activity.
+- **Progressive Web App**:
+  - Installable on mobile and desktop with online/offline status feedback.
 
 ## 👥 Seed Members
+
 | Name | Role |
 | :--- | :--- |
 | **Nithyasree M** | Team Lead & ML Developer |
-| **Nandhika S** | ML Engineer | `nandhikas3@gmail.com` |
+| **Nandhika S** | ML Engineer |
 | **Sivakumaran S** | Biotech Researcher |
 | **Abhijith Sriram V** | IoT Engineer |
 
----
+## 🛠️ Tech Stack
 
-## 🚀 Step-by-Step Setup Guide
+- React 19 and TypeScript
+- Vite and Tailwind CSS
+- Supabase Auth, PostgreSQL, Realtime, Row Level Security, and Storage
+- Vite PWA
+- Lucide React and Motion
 
-### 1. Create a Supabase Project
-1. Go to [supabase.com](https://supabase.com) and create a free project.
-2. Under **Project Settings** -> **API**, copy your:
-   - **Project URL** (`https://xyzcompany.supabase.co`)
-   - **anon / public key** (`eyJhbG...`)
+## 🚀 Local Setup
 
-### 2. Run the SQL Script
-1. In the Supabase Dashboard, open the **SQL Editor**.
-2. Click **New Query**, copy the entire contents of `supabase-schema.sql`, paste it, and click **Run**.
-3. This creates:
-   - All 11 tables (`allowed_emails`, `profiles`, `milestones`, `milestone_date_history`, `tasks`, `task_comments`, `meetings`, `meeting_action_items`, `documents`, `notifications`, `activity_log`).
-   - Row Level Security (RLS) policies and helper functions.
-   - Triggers for automatic milestone progress % calculation, date history logging, and completion timestamps.
-   - Storage bucket `spiceguard-docs` with upload/download policies.
-   - Realtime publication subscriptions on all core tables.
-   - Pre-loaded 6-month PoC seed milestones and tasks.
+### Prerequisites
 
-### 3. Add or Modify Allowed Emails
-To add additional team members or customize emails, run this in the Supabase SQL Editor:
+- Node.js and npm
+- A [Supabase](https://supabase.com/) project
+
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Configure Supabase
+
+Copy `.env.example` to `.env.local` and set:
+
+```bash
+VITE_SUPABASE_URL="https://your-project.supabase.co"
+VITE_SUPABASE_ANON_KEY="your-anon-key"
+```
+
+In the Supabase Dashboard:
+
+1. Open **SQL Editor** and run the complete [`supabase-schema.sql`](./supabase-schema.sql) script.
+2. Confirm that the `spiceguard-docs` storage bucket and its policies were created.
+3. Add or update authorized members in `public.allowed_emails`:
+
 ```sql
 INSERT INTO public.allowed_emails (email, full_name, role, is_team_lead, avatar_color)
 VALUES ('your-email@example.com', 'Your Name', 'Your Role', FALSE, '#14532D')
 ON CONFLICT (email) DO NOTHING;
 ```
 
-### 4. Configure Environment Variables
-Set the following in `.env` (or in Vercel / Netlify environment settings):
+The schema creates the application tables, RLS policies, helper functions, triggers, storage policies, realtime configuration, and starter milestones/tasks.
+
+### 3. Start the development server
+
 ```bash
-VITE_SUPABASE_URL="https://your-project.supabase.co"
-VITE_SUPABASE_ANON_KEY="your-anon-key"
+npm run dev
 ```
 
-### 5. Deploy to Vercel or Netlify
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
-- Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` as environment variables in the project settings.
-=======
-# SpiceGuard
-A personalized productivity and milestone tracking app with task management, progress tracking, profile customization, and activity monitoring.
->>>>>>> 9258a888c8c066f4dfd99ef27c4852ac7f3e6956
+Open [http://localhost:3000](http://localhost:3000).
+
+## 📦 Scripts
+
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Start the Vite development server on port 3000 |
+| `npm run build` | Create a production build in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint` | Run the TypeScript compiler without emitting files |
+
+## 🚢 Deployment
+
+Deploy the Vite application to Vercel, Netlify, or another static hosting provider.
+
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Required environment variables:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`
+
+Configure the same Supabase environment variables in the hosting provider's project settings. Do not commit `.env.local` or Supabase keys to source control.
