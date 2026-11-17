@@ -36,12 +36,12 @@ Real-time, mobile-first team project tracker built for the 4-person SpiceGuard s
 ---
 
 ## 👥 Seed Members
-| Name | Role | Email |
-| :--- | :--- | :--- |
-| **Nithyasree M** | Team Lead & ML Developer | `nithyasree@spiceguard.ai` |
+| Name | Role |
+| :--- | :--- |
+| **Nithyasree M** | Team Lead & ML Developer |
 | **Nandhika S** | ML Engineer | `nandhikas3@gmail.com` |
-| **Sivakumaran S** | Biotech Researcher | `sivakumaran@spiceguard.ai` |
-| **Abhijith Sriram V** | IoT Engineer | `abhijith@spiceguard.ai` |
+| **Sivakumaran S** | Biotech Researcher |
+| **Abhijith Sriram V** | IoT Engineer |
 
 ---
 
